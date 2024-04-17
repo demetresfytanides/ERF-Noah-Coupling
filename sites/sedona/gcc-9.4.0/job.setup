@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+export JobWorkDir="/home/akash/Desktop/Akash/Projects/ERF-Noah-Coupling/sites/sedona/gcc-9.4.0"
+
+cd /home/akash/Desktop/Akash/Projects/ERF-Noah-Coupling
+
+# This file is generated using configuration script
+SiteName="sedona/gcc-9.4.0"
+Profile=False
+
+cd /home/akash/Desktop/Akash/Projects/ERF-Noah-Coupling
+
+# Bash file to load modules and set environment
+# variables for compilers and external libraries
+
+# Set project home using realpath
+# of current directory
+export PROJECT_HOME=$(realpath .)
+
+# Set SiteHome to realpath of SiteName
+SiteHome="$PROJECT_HOME/sites/$SiteName"
+
+# Load modules from the site directory
+source $SiteHome/environment.sh
+
+# Store path to amrex as environment variable
+export AMREX2D_HOME="$PROJECT_HOME/software/amrex/AMReX/install-$SiteName/2D"
+export AMREX3D_HOME="$PROJECT_HOME/software/amrex/AMReX/install-$SiteName/3D"
+
+# Path to Flash-X
+export ERF_HOME="$PROJECT_HOME/software/erf/ERF"
+
+# Output information to stdout
+echo "---------------------------------------------------------------------------------------"
+echo "Execution Environment:"
+echo "---------------------------------------------------------------------------------------"
+echo "PROJECT_HOME=$PROJECT_HOME"
+echo "SITE_HOME=$SiteHome"
+echo "MPI_HOME=$MPI_HOME"
+echo "HDF5_HOME=$HDF5_HOME"
+echo "ERF_HOME=$ERF_HOME"
+echo "AMREX2D_HOME=$AMREX2D_HOME"
+echo "AMREX3D_HOME=$AMREX3D_HOME"
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+echo "PATH=$PATH"
+echo "---------------------------------------------------------------------------------------"
