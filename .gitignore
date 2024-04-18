@@ -12,6 +12,7 @@ __pycache__
 *.ipynb_checkpoints
 config.sh
 software/erf/ERF
+software/erftools/erftools
 boxmem
 *jobnode.archive*
 !software/flashx
