@@ -13,6 +13,7 @@ __pycache__
 config.sh
 software/erf/ERF
 software/erftools/erftools
+software/noah/NOAH-MP
 boxmem
 *jobnode.archive*
 !software/flashx

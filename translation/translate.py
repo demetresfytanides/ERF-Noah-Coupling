@@ -6,7 +6,7 @@ import os, sys
 for path in os.getenv("PYMODULE_PATH").split(":"):
     sys.path.insert(0, path)
 
-import api, neucol
+import api, noah
 
 from typing import Optional
 import fire, transformers, torch
@@ -46,7 +46,7 @@ def main(
         api.display_output(f'Checkpoint directory exists for option "{llm_choice}"')
 
     dest = api.get_user_input("Enter destination folder name")
-    mapping = neucol.create_src_mapping(dest)
+    mapping = noah.create_src_mapping(dest)
 
     source_dirs = api.get_user_input(
         "Enter source code directories separated by commas, use (*) for all"
@@ -111,7 +111,7 @@ def main(
                 with open(sfile, "r") as source:
                     source_code = source.readlines()
 
-                file_prompt = neucol.infer_src_mapping(sfile, mapping)
+                file_prompt = noah.infer_src_mapping(sfile, mapping)
                 file_prompt.append("The following code is part of a single file")
 
                 llm_prompt = main_prompt + file_prompt

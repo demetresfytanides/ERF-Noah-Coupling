@@ -48,8 +48,8 @@ def create_src_mapping(dest):
     ---------
     dest : String value of destination directory
     """
-    src_dir = os.getenv("MCFM_HOME") + os.sep + "src"
-    dest_dir = os.getenv("MCFM_HOME") + os.sep + dest
+    src_dir = os.getenv("NOAH_HOME") + os.sep + "src"
+    dest_dir = os.getenv("NOAH_HOME") + os.sep + dest
 
     if os.path.exists(dest_dir):
         user_decision = api.get_user_input(
@@ -66,7 +66,7 @@ def create_src_mapping(dest):
             raise ValueError
 
     else:
-        api.display_output(f'Creating desitnation directory "{dest}"')
+        api.display_output(f'Creating destination directory "{dest}"')
         for item in os.walk(src_dir):
             sub_dir = item[0].replace(src_dir + os.sep, "")
             os.makedirs(dest_dir + os.sep + sub_dir)
