@@ -14,6 +14,8 @@ source $SiteHome/environment.sh
 # Path to ERF and AMReX
 export ERF_HOME="$PROJECT_HOME/software/erf/ERF"
 export AMREX_HOME="$ERF_HOME/Submodules/AMReX"
+export MODEL_HOME="$PROJECT_HOME/models"
+export NOAH_HOME="$PROJECT_HOME/software/noah/NOAH-MP"
 
 # Output information to stdout
 echo "---------------------------------------------------------------------------------------"
@@ -25,6 +27,8 @@ echo "MPI_HOME=$MPI_HOME"
 echo "HDF5_HOME=$HDF5_HOME"
 echo "ERF_HOME=$ERF_HOME"
 echo "AMREX_HOME=$AMREX_HOME"
+echo "NOAH_HOME=$NOAH_HOME"
+echo "MODEL_HOME=$MODEL_HOME"
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 echo "PATH=$PATH"
 echo "---------------------------------------------------------------------------------------"

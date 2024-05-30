@@ -1,3 +1,5 @@
+huggingface_hub[cli]
+alive-progress
 click
 git+ssh://git@github.com/Box-Tools/BoxKit.git@main
 git+ssh://git@github.com/Lab-Notebooks/Jobrunner.git@development --install-option="--with-instruments"

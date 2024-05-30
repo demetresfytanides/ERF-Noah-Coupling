@@ -1,0 +1,5 @@
+job:
+  submit:
+    - pymodule.sh
+    - translate.sh
+  target: translate.py

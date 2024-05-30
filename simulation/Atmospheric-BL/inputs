@@ -77,3 +77,7 @@ erf.pbl_type    = "MYNN2.5"
 #prob.KE_0            = 0.4 # [m2/s2]
 #prob.KE_decay_height = 250. # [m]
 #prob.KE_decay_order  = 1
+
+erf.data_log    = surf_hist.dat mean_profiles.dat covar_profiles.dat sfs_profiles.dat
+erf.profile_int = 5
+erf.interp_profiles_to_cc = false
