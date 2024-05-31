@@ -9,35 +9,10 @@ import api
 
 
 def infer_src_mapping(sfile, mapping):
+    fi_prompt = ["Write FORTRAN part of the FORTRAN-C interface."]
+    ci_prompt = ["Write the Extern C part of the FORTRAN-C interface."]
 
-    prompt = []
-
-    if sfile == mapping["src"]["dir"] + os.sep + "Mods/AllModules.h":
-        prompt.append(
-            "Convert this file to a C++ header file. Note that inputs are chunks which belong to same file, do not try "
-            + "to infer around the input or provide any context. Simply convert the source code from FORTRAN to C++."
-        )
-    else:
-        prompt.append(
-            "Convert this file to a C++ source code file. Note that inputs are chunks which belong to same file, do not try "
-            + "to infer around the input or provide any context. Simply convert the source code from FORTRAN to C++."
-        )
-        prompt.append(
-            "The code blocks you will receive are part of a bigger codebase so do not add "
-            + "additional function declarations, or a main function definition. Just do the conversion process line-by-line."
-        )
-
-        prompt.append(
-            'Replace "use" statements in FORTRAN with "#include "Mods/AllModules.h" in the C++ version.'
-        )
-        prompt.append(
-            'Put the "#include" statement at the top of the file and assume that any '
-            + "variables that are not declared in the file are available in the header file."
-        )
-
-    prompt.append('Treat "real(dp)" as "real(*8)", and "complex(dp)" as "complex(*8)".')
-
-    return prompt
+    return fi_prompt, ci_prompt
 
 
 def create_src_mapping(dest):
@@ -68,43 +43,43 @@ def create_src_mapping(dest):
     else:
         api.display_output(f'Creating destination directory "{dest}"')
         for item in os.walk(src_dir):
-            sub_dir = item[0].replace(src_dir + os.sep, "")
+            sub_dir = item[0].replace(src_dir, "")
             os.makedirs(dest_dir + os.sep + sub_dir)
 
-    src_files = []
-    dest_files = []
+    src_f90_files = []
+    dest_fi_files = []
+    dest_ci_files = []
 
     for item in os.walk(src_dir):
 
-        sub_dir = item[0].replace(src_dir + os.sep, "")
+        sub_dir = item[0].replace(src_dir, "")
 
         for file in item[2]:
-            if not file.endswith(
-                ("_mod.f", "_mod.f90", ".cxx", ".lh", ".sh", ".txt", "README", ".h")
-            ) and not file.startswith("mod_"):
-                src_files.append(src_dir + os.sep + sub_dir + os.sep + file)
+            if file.endswith((".F90")):
+                src_f90_files.append(src_dir + os.sep + sub_dir + os.sep + file)
 
-                if file.endswith((".F90", ".f", ".f90")):
-                    dest_files.append(
-                        dest_dir
-                        + os.sep
-                        + sub_dir
-                        + os.sep
-                        + file.replace(".F90", ".cxx")
-                        .replace(".f", ".cxx")
-                        .replace(".f90", ".cxx")
-                    )
+                dest_ci_files.append(
+                    dest_dir
+                    + os.sep
+                    + sub_dir
+                    + os.sep
+                    + file.replace(".F90", "_ci.cxx")
+                )
+                dest_fi_files.append(
+                    dest_dir
+                    + os.sep
+                    + sub_dir
+                    + os.sep
+                    + file.replace(".F90", "_fi.F90")
+                )
 
-                else:
-                    raise ValueError(f"Unrecognized extension for file: {file}")
-
-            if file.endswith("AllModules.h"):
-                src_files.append(src_dir + os.sep + sub_dir + os.sep + file)
-                dest_files.append(dest_dir + os.sep + sub_dir + os.sep + file)
+            else:
+                continue
+                # raise ValueError(f"Unrecognized extension for file: {file}")
 
     mapping = {
-        "src": {"files": src_files, "dir": src_dir},
-        "dest": {"files": dest_files, "dir": dest_dir},
+        "src": {"f90_files": src_f90_files, "dir": src_dir},
+        "dest": {"fi_files": dest_fi_files, "ci_files": dest_ci_files, "dir": dest_dir},
     }
 
     return mapping

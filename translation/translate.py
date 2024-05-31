@@ -51,23 +51,30 @@ def main(
     source_dirs = api.get_user_input(
         "Enter source code directories separated by commas, use (*) for all"
     )
-    source_files = []
-    target_files = []
+    source_f90_files = []
+    target_fi_files = []
+    target_ci_files = []
 
     if source_dirs == "*":
-        source_files.extend(mapping["src"]["files"])
-        target_files.extend(mapping["dest"]["files"])
+        source_f90_files.extend(mapping["src"]["f90_files"])
+        target_fi_files.extend(mapping["dest"]["fi_files"])
+        target_ci_files.extend(mapping["dest"]["ci_files"])
 
     else:
-        for sfile, tfile in zip(mapping["src"]["files"], mapping["dest"]["files"]):
+        for f90_file, fi_file, ci_file in zip(
+            mapping["src"]["f90_files"],
+            mapping["dest"]["fi_files"],
+            mapping["dest"]["ci_files"],
+        ):
             for sdir in source_dirs.split(","):
-                if (sdir.strip() in sfile) and (sdir.strip() in tfile):
-                    source_files.append(sfile)
-                    target_files.append(tfile)
+                if (sdir.strip() in f90_file) and (sdir.strip() in fi_file):
+                    source_f90_files.append(f90_file)
+                    target_fi_files.append(fi_file)
+                    target_ci_files.append(ci_file)
 
-    if len(source_files) != len(target_files):
+    if len(source_f90_files) != len(target_fi_files):
         api.display_output(
-            "source_files and target_files for conversion do not match in length"
+            "source_f90_files and target_fi_files for conversion do not match in length"
         )
         raise ValueError
 
@@ -76,20 +83,9 @@ def main(
     main_prompt = []
     main_prompt.append(
         "You are a code conversion tool for a scientific computing application. "
-        + "The application is organized as different source files in a directory structure."
+        + "The application is organized as different source files in a directory "
+        + "and you will help create FORTRAN and C++ module files for EXTERN C interface."
     )
-    # main_prompt.append(
-    #    "Convert FORTRAN source code to C++. Do not infer context outside the block of code you receive."
-    # )
-    # main_prompt.append(
-    #    "The code blocks you will receive are part of a bigger codebase so do not add "
-    #    + "additional function declarations, or a main function definition. Just do the conversion process line-by-line."
-    # )
-    # main_prompt.append(
-    #    "Note that the output will be written directly to the file, so do not output code in "
-    #    + "markdown code block. Include any text as C++ comments."
-    # )
-
     tokenizer = transformers.AutoTokenizer.from_pretrained(ckpt_dir)
 
     pipeline = transformers.pipeline(
@@ -99,26 +95,27 @@ def main(
         device=0,
     )
 
-    with alive_bar(len(source_files), bar="blocks") as bar:
+    with alive_bar(len(source_f90_files), bar="blocks") as bar:
 
-        for sfile, tfile in zip(source_files, target_files):
+        for f90_file, fi_file, ci_file in zip(
+            source_f90_files, target_fi_files, target_ci_files
+        ):
 
-            bar.text(sfile.replace(mapping["src"]["dir"] + os.sep, ""))
+            bar.text(f90_file.replace(mapping["src"]["dir"] + os.sep, ""))
             bar()
 
-            if not os.path.isfile(tfile):
+            if not (os.path.isfile(fi_file) and os.path.isfile(ci_file)):
 
-                with open(sfile, "r") as source:
+                with open(f90_file, "r") as source:
                     source_code = source.readlines()
 
-                file_prompt = noah.infer_src_mapping(sfile, mapping)
-                file_prompt.append("The following code is part of a single file")
+                fi_prompt, ci_prompt = noah.infer_src_mapping(f90_file, mapping)
+                fi_prompt.append("The following code is part of a single file")
+                ci_prompt.append("The following code is part of a single file")
 
-                llm_prompt = main_prompt + file_prompt
-
-                with open(tfile, "w") as destination:
+                with open(fi_file, "w") as destination:
                     destination.write("/*PROMPT START")
-                    for prompt_line in llm_prompt:
+                    for prompt_line in main_prompt + fi_prompt:
                         destination.write(f"\n//{prompt_line}")
                     destination.write(f"\nPROMPT END*/\n\n")
                     chunk_size = 100
@@ -131,7 +128,45 @@ def main(
                         instructions = [
                             dict(
                                 role="user",
-                                content="\n".join(llm_prompt) + ":\n" + "".join(lines),
+                                content="\n".join(main_prompt + fi_prompt)
+                                + ":\n"
+                                + "".join(lines),
+                            )
+                        ]
+
+                        results = pipeline(
+                            instructions,
+                            max_new_tokens=max_new_tokens,
+                            max_length=max_length,
+                            batch_size=batch_size,
+                            # temperature=temperature,
+                            # top_p=top_p,
+                            # do_sample=True,
+                            eos_token_id=tokenizer.eos_token_id,
+                            pad_token_id=50256,
+                        )
+
+                        for result in results:
+                            destination.write(result["generated_text"][-1]["content"])
+
+                with open(ci_file, "w") as destination:
+                    destination.write("/*PROMPT START")
+                    for prompt_line in main_prompt + ci_prompt:
+                        destination.write(f"\n//{prompt_line}")
+                    destination.write(f"\nPROMPT END*/\n\n")
+                    chunk_size = 100
+
+                    for lines in [
+                        source_code[i : i + chunk_size]
+                        for i in range(0, len(source_code), chunk_size)
+                    ]:
+
+                        instructions = [
+                            dict(
+                                role="user",
+                                content="\n".join(main_prompt + ci_prompt)
+                                + ":\n"
+                                + "".join(lines),
                             )
                         ]
 
