@@ -15,7 +15,7 @@ source $SiteHome/environment.sh
 export ERF_HOME="$PROJECT_HOME/software/erf/ERF"
 export AMREX_HOME="$ERF_HOME/Submodules/AMReX"
 export MODEL_HOME="$PROJECT_HOME/models"
-export NOAH_HOME="$PROJECT_HOME/software/noah/NOAH-MP"
+export NOAH_HOME="$ERF_HOME/Submodules/NOAH-MP"
 
 # Output information to stdout
 echo "---------------------------------------------------------------------------------------"

@@ -7,7 +7,9 @@ export MPI_HOME=$(which mpicc | sed s/'\/bin\/mpicc'//)
 
 # Load HDF5 module in desired configuration if available. If not specified
 # the HDF5 will be built when setting up software
-module load hdf5-1.8.20
+module load hdf5-1.12.main
 
 # Path to parallel HDF5 installtion with fortran support
 export HDF5_HOME=$(which h5pfc | sed s/'\/bin\/h5pfc'//)
+
+module load netcdf
