@@ -16,4 +16,5 @@ software/erftools/erftools
 software/noah/NOAH-MP
 boxmem
 *jobnode.archive*
+!software/hdf5
 !software/flashx
