@@ -16,6 +16,10 @@ export ERF_HOME="$PROJECT_HOME/software/erf/ERF"
 export AMREX_HOME="$ERF_HOME/Submodules/AMReX"
 export MODEL_HOME="$PROJECT_HOME/models"
 export NOAH_HOME="$ERF_HOME/Submodules/NOAH-MP"
+export NETCDF_HOME="$PROJECT_HOME/software/netcdf/netcdf-install-$SiteName"
+
+export LD_LIBRARY_PATH="$NETCDF_HOME/lib:$LD_LIBRARY_PATH"
+export PATH="$NETCDF_HOME/bin:$PATH"
 
 # Output information to stdout
 echo "---------------------------------------------------------------------------------------"
@@ -30,5 +34,6 @@ echo "AMREX_HOME=$AMREX_HOME"
 echo "NOAH_HOME=$NOAH_HOME"
 echo "MODEL_HOME=$MODEL_HOME"
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+echo "NETCDF_HOME=$NETCDF_HOME"
 echo "PATH=$PATH"
 echo "---------------------------------------------------------------------------------------"

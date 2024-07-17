@@ -1,0 +1,4 @@
+job:
+ setup:
+   - setupNetcdf-C.sh
+   - setupNetcdf-F.sh

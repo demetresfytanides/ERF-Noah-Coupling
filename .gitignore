@@ -12,8 +12,12 @@ __pycache__
 *.ipynb_checkpoints
 config.sh
 software/erf/ERF
+software/wrf/WRF
+software/hdf5/HDF5
 software/erftools/erftools
-software/noah/NOAH-MP
+software/netcdf/netcdf-c
+software/netcdf/netcdf-fortran
+software/netcdf/netcdf-install-*
 boxmem
 *jobnode.archive*
 !software/hdf5

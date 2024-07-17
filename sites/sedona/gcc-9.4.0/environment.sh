@@ -12,4 +12,4 @@ module load hdf5-1.12.main
 # Path to parallel HDF5 installtion with fortran support
 export HDF5_HOME=$(which h5pfc | sed s/'\/bin\/h5pfc'//)
 
-module load netcdf
+#module load netcdf
