@@ -67,6 +67,8 @@ erf.abl_geo_wind = 8.0 0.0 0.0
 # Turbulence closure
 erf.les_type        = "None"
 
+erf.land_surface_model = "NOAH"
+
 # NOT USED
 #erf.rho0_trans      = 1.3223 # from Cuxart et al. 2006
 #erf.theta_ref       = 263.5 # from Cuxart et al. 2006
