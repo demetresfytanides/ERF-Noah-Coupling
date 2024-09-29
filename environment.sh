@@ -21,6 +21,16 @@ export NETCDF_HOME="$PROJECT_HOME/software/netcdf/netcdf-install-$SiteName"
 export LD_LIBRARY_PATH="$NETCDF_HOME/lib:$LD_LIBRARY_PATH"
 export PATH="$NETCDF_HOME/bin:$PATH"
 
+# Path to parallel HDF5 installtion with fortran support
+if [ $HDF5_HOME ]; then
+	BuildHDF5=false
+else
+	BuildHDF5=true
+	export HDF5_HOME="$PROJECT_HOME/software/hdf5/HDF5/install-$SiteName"
+	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HDF5_HOME/lib"
+	export LIBRARY_PATH="$LD_LIBRARY_PATH"
+fi
+
 # Output information to stdout
 echo "---------------------------------------------------------------------------------------"
 echo "Execution Environment:"
