@@ -1,0 +1,6 @@
+# TOML configuration file for `jobrunner`.
+
+job:
+  setup:
+    - setupNoah.sh
+    - setupExample.sh
