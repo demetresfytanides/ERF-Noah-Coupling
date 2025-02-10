@@ -20,6 +20,7 @@ export NETCDF_HOME="$PROJECT_HOME/software/netcdf/netcdf-install-$SiteName"
 
 export LD_LIBRARY_PATH="$NETCDF_HOME/lib:$LD_LIBRARY_PATH"
 export PATH="$NETCDF_HOME/bin:$PATH"
+export PKG_CONFIG_PATH="$NETCDF_HOME/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Path to parallel HDF5 installtion with fortran support
 if [ $HDF5_HOME ]; then
