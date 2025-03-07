@@ -20,9 +20,10 @@ export NETCDF_HOME="$PROJECT_HOME/software/netcdf/netcdf-install-$SiteName"
 export JASPER_HOME="$PROJECT_HOME/software/jasper/jasper-$SiteName"
 export HRLDAS_HOME="$PROJECT_HOME/software/hrldas/HRLDAS"
 export CDO_HOME="$PROJECT_HOME/software/cdo/cdo-install-$SiteName"
+export WGRIB_HOME="$PROJECT_HOME/software/wgrib/wgrib"
 
 export LD_LIBRARY_PATH="$NETCDF_HOME/lib:$LD_LIBRARY_PATH"
-export PATH="$CDO_HOME/bin:$NETCDF_HOME/bin:$PATH"
+export PATH="$WGRIB_HOME:$CDO_HOME/bin:$NETCDF_HOME/bin:$PATH"
 export PKG_CONFIG_PATH="$NETCDF_HOME/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Path to parallel HDF5 installtion with fortran support

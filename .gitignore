@@ -24,6 +24,7 @@ software/hrldas/HRLDAS
 software/cdo/cdo-2.1.1.tar
 software/cdo/cdo-2.1.1
 software/cdo/cdo-install-*
+software/wgrib/wgrib
 boxmem
 simulation/NoahMP-Example/NoahMP
 simulation/NoahMP-Example/NoahMP-Example
