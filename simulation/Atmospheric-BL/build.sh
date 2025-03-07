@@ -7,4 +7,4 @@ NodeDir=$(realpath .)
 
 cd $ERF_HOME #&& git checkout $ERFSha
 cd Exec/ABL && cp $NodeDir/GNUmakefile . && make clean || true
-make -j && cp ERF3d.gnu.TEST.TPROF.MPI.ex $NodeDir
+NETCDF_DIR=$NETCDF_HOME && make -j && cp ERF3d.gnu.TEST.TPROF.MPI.ex $NodeDir

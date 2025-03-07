@@ -44,7 +44,7 @@ erf.check_int       = -1         # number of timesteps between checkpoints
 # PLOTFILES
 erf.plot_file_1     = plt       # prefix of plotfile name
 erf.plot_int_1      = 300        # number of timesteps between plotfiles
-erf.plot_vars_1     = density x_velocity y_velocity z_velocity pressure theta rhoQKE Kmv Khv
+erf.plot_vars_1     = density x_velocity y_velocity z_velocity pressure theta
 
 
 # SOLVER CHOICE
@@ -73,7 +73,7 @@ erf.land_surface_model = "NOAH"
 #erf.rho0_trans      = 1.3223 # from Cuxart et al. 2006
 #erf.theta_ref       = 263.5 # from Cuxart et al. 2006
 
-erf.pbl_type    = "MYNN2.5"
+#erf.pbl_type    = "MYNN2.5"
 
 # Initial conditions from Beare et al. 2006
 #prob.KE_0            = 0.4 # [m2/s2]

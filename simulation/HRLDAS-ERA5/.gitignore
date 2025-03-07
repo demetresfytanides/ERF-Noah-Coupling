@@ -1,0 +1,6 @@
+*.grib
+*.nc
+*.exe
+OUTPUTS/
+LDASIN/
+LDASOUT/

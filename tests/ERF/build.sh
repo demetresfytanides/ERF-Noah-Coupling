@@ -1,5 +1,9 @@
 rm -rf tmp_build_dir
 mkdir -pv tmp_build_dir && cd tmp_build_dir
+
+which cmake
+cmake --version
+
 cmake -DCMAKE_INSTALL_PREFIX:PATH=./install \
    -DCMAKE_CXX_COMPILER:STRING=mpicxx \
    -DCMAKE_C_COMPILER:STRING=mpicc \
@@ -16,6 +20,6 @@ cmake -DCMAKE_INSTALL_PREFIX:PATH=./install \
    -DERF_ENABLE_NOAH:BOOL=ON \
    -DERF_ENABLE_HDF5:BOOL=ON \
    -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON \
-   $ERF_HOME && make -j
+   $ERF_HOME && make -j10
 
-#ctest -VV -L 'regression'
+ctest -VV -L 'regression'
