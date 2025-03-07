@@ -22,7 +22,7 @@ export HRLDAS_HOME="$PROJECT_HOME/software/hrldas/HRLDAS"
 export CDO_HOME="$PROJECT_HOME/software/cdo/cdo-install-$SiteName"
 export WGRIB_HOME="$PROJECT_HOME/software/wgrib/wgrib"
 
-export LD_LIBRARY_PATH="$NETCDF_HOME/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$JASPER_HOME/install/lib:$NETCDF_HOME/lib:$LD_LIBRARY_PATH"
 export PATH="$WGRIB_HOME:$CDO_HOME/bin:$NETCDF_HOME/bin:$PATH"
 export PKG_CONFIG_PATH="$NETCDF_HOME/lib/pkgconfig:$PKG_CONFIG_PATH"
 
