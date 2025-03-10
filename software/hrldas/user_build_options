@@ -5,14 +5,14 @@
 #=============================================================================================
 
  COMPILERF90    =       mpif90
- MPPFLAG        =       YES
+# MPPFLAG        =       YES
  FREESOURCE     =       -ffree-form  -ffree-line-length-none
  F90FLAGS       =       -g -fconvert=big-endian -fbounds-check -fno-range-check -Wno-argument-mismatch
- MODFLAG        =       -I ../MPP
- HYDRO_LIB      =       ../MPP/mpp_land.o ../MPP/CPL_WRF.o
+# MODFLAG        =       -I ../MPP
+# HYDRO_LIB      =       ../MPP/mpp_land.o ../MPP/CPL_WRF.o
  LDFLAGS        =
  CPP            =       cpp
- CPPFLAGS       =       -P -traditional -DMPP_LAND -D_GFORTRAN_ # -DSPATIAL_SOIL
+ CPPFLAGS       =       -P -traditional -D_GFORTRAN_ # -DSPATIAL_SOIL -DMPP_LAND
  LIBS           =
  LIBJASPER      =      -L${JASPER_HOME}/install/lib -ljasper
 
