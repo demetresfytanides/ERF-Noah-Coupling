@@ -1,9 +1,12 @@
 &NOAHLSM_OFFLINE
 
- ERF_SETUP_FILE = "flat_land.nc"
+ ERF_SETUP_FILE = "wrfinput_chisholmview_d01"
 
- KDAY = 2
- SPINUP_LOOPS = 0
+ START_YEAR  = 2013
+ START_MONTH = 11
+ START_DAY   = 21
+ START_HOUR  = 06
+ START_MIN   = 00
 
  KDAY = 2
  SPINUP_LOOPS = 0
@@ -40,11 +43,17 @@
  SKIP_FIRST_OUTPUT = .false.
  RESTART_FREQUENCY_HOURS = 24
 
- NSNOW=1
- NSOIL=1
+ NSNOW = 2
+ NSOIL = 4
+
+ soil_thick_input(1) = 0.10
+ soil_thick_input(2) = 0.30
+ soil_thick_input(3) = 0.60
+ soil_thick_input(4) = 1.00
 
  ZLVL = 10.0
 
  SF_URBAN_PHYSICS = 0
  USE_WUDAPT_LCZ = 0
+
 /
