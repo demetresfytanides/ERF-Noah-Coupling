@@ -1,0 +1,10 @@
+# TOML configuration file for `jobrunner`.
+
+job:
+  setup:
+    - build_erf.sh
+  submit:
+    - run_wps.sh
+  clean:
+    - erf_wps_test
+    - "*.exe"

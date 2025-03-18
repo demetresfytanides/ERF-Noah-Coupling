@@ -1,5 +1,0 @@
-# TOML configuration file for `jobrunner`.
-
-job:
-  setup:
-    - build.sh
