@@ -43,7 +43,7 @@
  SKIP_FIRST_OUTPUT = .false.
  RESTART_FREQUENCY_HOURS = 24
 
- NSNOW = 2
+ NSNOW = 4
  NSOIL = 4
 
  soil_thick_input(1) = 0.10
