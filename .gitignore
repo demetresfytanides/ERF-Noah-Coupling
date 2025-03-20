@@ -18,6 +18,7 @@ software/erftools/erftools
 software/netcdf/netcdf-c
 software/netcdf/netcdf-fortran
 software/netcdf/netcdf-install-*
+software/netcdf/pnetcdf
 software/jasper/jasper
 software/jasper/jasper-*
 software/hrldas/HRLDAS

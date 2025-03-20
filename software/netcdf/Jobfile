@@ -2,3 +2,4 @@ job:
  setup:
    - setupNetcdf-C.sh
    - setupNetcdf-F.sh
+   - setupNetcdf-Parallel.sh
