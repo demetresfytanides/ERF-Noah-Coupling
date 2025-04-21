@@ -6,7 +6,7 @@ else
 	cd netcdf-c
 fi
 
-./configure --prefix=$NETCDF_HOME
+./configure --enable-parallel4 CC=mpicc CXX=mpicxx --prefix=$NETCDF_HOME
 
 # compile and install
 make -j && make install

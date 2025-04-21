@@ -6,7 +6,10 @@ else
 	cd netcdf-fortran
 fi
 
-CPPFLAGS=-I${NETCDF_HOME}/include LDFLAGS=-L${NETCDF_HOME}/lib ./configure --prefix=$NETCDF_HOME
+CPPFLAGS=-I${NETCDF_HOME}/include LDFLAGS=-L${NETCDF_HOME}/lib ./configure \
+							--enable-parallel4 \
+							CC=mpicc FC=mpif90 F77=mpif90 \
+							--prefix=$NETCDF_HOME
 
 # compile and install
 make -j && make install
