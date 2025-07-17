@@ -36,6 +36,8 @@ else
 	export LIBRARY_PATH="$LD_LIBRARY_PATH"
 fi
 
+export LIBRARY_PATH="$LD_LIBRARY_PATH"
+
 # Output information to stdout
 echo "---------------------------------------------------------------------------------------"
 echo "Execution Environment:"

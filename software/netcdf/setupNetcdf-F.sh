@@ -6,6 +6,9 @@ else
 	cd netcdf-fortran
 fi
 
+export FCFLAGS="-w -fallow-argument-mismatch -O2"
+export FFLAGS="-w -fallow-argument-mismatch -O2"
+
 CPPFLAGS=-I${NETCDF_HOME}/include LDFLAGS=-L${NETCDF_HOME}/lib ./configure \
 							--enable-parallel4 \
 							CC=mpicc FC=mpif90 F77=mpif90 \
