@@ -1,5 +1,5 @@
 # ------------------  INPUTS TO MAIN PROGRAM  -------------------
-max_step = 25
+max_step = 0
 
 amrex.fpe_trap_invalid = 1
 
@@ -8,6 +8,7 @@ fabarray.mfiter_tile_size = 1024 1024 1024
 # PROBLEM SIZE & GEOMETRY
 geometry.prob_extent = 412500. 	412500. 	16500.
 amr.n_cell           =    250      250   	  120
+amr.ref_ratio_vect = 11 11 1 5 5 1
 
 geometry.is_periodic = 0 0 0
 
@@ -28,7 +29,7 @@ erf.v              = 1       # verbosity in ERF.cpp
 amr.v              = 1       # verbosity in Amr.cpp
 
 # REFINEMENT / REGRIDDING
-amr.max_level       = 0       # maximum level number allowed
+amr.max_level       = 2      # maximum level number allowed
 
 # CHECKPOINT FILES
 erf.check_file      = chk     # root name of checkpoint file
@@ -47,6 +48,8 @@ erf.use_gravity = true
 erf.terrain_type = StaticFittedMesh
 
 erf.land_surface_model = "NOAH"
+
+erf.coupling_type = "OneWay"
 
 erf.moisture_model = "Kessler"
 
@@ -69,4 +72,6 @@ erf.real_width     = 1
 erf.real_set_width = 1
 erf.init_type      = "WRFInput"
 erf.nc_init_file_0 = "wrfinput_d01"
+erf.nc_init_file_1 = "wrfinput_d02"
+erf.nc_init_file_2 = "wrfinput_d03"
 erf.nc_bdy_file    = "wrfbdy_d01"

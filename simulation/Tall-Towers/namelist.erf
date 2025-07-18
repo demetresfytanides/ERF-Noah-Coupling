@@ -1,6 +1,8 @@
 &NOAHLSM_OFFLINE
 
- ERF_SETUP_FILE = "wrfinput_d01"
+ ERF_SETUP_FILE_01 = "wrfinput_d01"
+ ERF_SETUP_FILE_02 = "wrfinput_d02"
+ ERF_SETUP_FILE_03 = "wrfinput_d03"
 
  START_YEAR  = 2013
  START_MONTH = 11
@@ -21,7 +23,7 @@
  FROZEN_SOIL_OPTION                = 1
  SUPERCOOLED_WATER_OPTION          = 1
  RADIATIVE_TRANSFER_OPTION         = 3
- SNOW_ALBEDO_OPTION                = 2
+ SNOW_ALBEDO_OPTION                = 3
  PCP_PARTITION_OPTION              = 1
  SNOW_THERMAL_CONDUCTIVITY         = 1
  TBOT_OPTION                       = 2

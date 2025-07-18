@@ -23,8 +23,8 @@
  !auxhist5_interval         =    0, 0, 0,
  frames_per_auxhist5       =    1, 1, 1,
  io_form_auxhist5          =    2,
- restart                   = .true.,
- restart_interval          =    30,
+ restart                   = .false., 
+restart_interval          =    30,
  io_form_history           =    2
  io_form_restart           =    2
  io_form_input             =    2
@@ -39,7 +39,7 @@
  time_step                 =    2,
  time_step_fract_num       =    0,
  time_step_fract_den       =    1,
- max_dom                   =    3,
+ max_dom                   =    1,
  max_ts_locs               =    60,
  max_ts_level              =    90,
  s_we                      =    1,  1,  1,
@@ -103,12 +103,12 @@
  sf_surface_physics        =  2,  2,  2,
  bl_pbl_physics            =  5,  0,  0,
  bldt                      =  0,  0,  0,
- cu_physics                =  1,  0,  0,
+ cu_physics                =  0,  0,  0, ! cumilative physics
  cudt                      =  5,  
  isfflx                    =  1,
  ifsnow                    =  0,
  icloud                    =  0,
- surface_input_source      =  1,
+ surface_input_source      =  3, ! do not recompute land use
  num_soil_layers           =  4,
  num_land_cat              = 21,
  sf_urban_physics          =  0,  0,  0,
