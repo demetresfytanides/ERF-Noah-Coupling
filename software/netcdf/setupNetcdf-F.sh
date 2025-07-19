@@ -1,16 +1,17 @@
 # Setup netcdf-fortran
 if [ ! -d "netcdf-fortran" ]; then
-	git clone git@github.com:Unidata/netcdf-fortran.git --branch v4.4.0 netcdf-fortran && cd netcdf-fortran
+	git clone git@github.com:Unidata/netcdf-fortran.git --branch v4.6.1 netcdf-fortran && cd netcdf-fortran
 
 else
 	cd netcdf-fortran
 fi
 
-export FCFLAGS="-w -fallow-argument-mismatch -O2"
-export FFLAGS="-w -fallow-argument-mismatch -O2"
+#export FCFLAGS="-w -fallow-argument-mismatch -O2"
+#export FFLAGS="-w -fallow-argument-mismatch -O2"
 
 CPPFLAGS=-I${NETCDF_HOME}/include LDFLAGS=-L${NETCDF_HOME}/lib ./configure \
-							--enable-parallel4 \
+							--enable-netcdf-4 \
+							--enable-parallel-tests \
 							CC=mpicc FC=mpif90 F77=mpif90 \
 							--prefix=$NETCDF_HOME
 
