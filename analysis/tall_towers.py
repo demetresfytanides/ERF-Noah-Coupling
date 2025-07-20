@@ -11,18 +11,11 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     import numpy as np
     import matplotlib.pyplot as plt
 
-    ds = yt.load(f"plt{str(filetag)}")
-    lnd = nc.Dataset(f"lnd{str(filetag)}/Level_{str(level).zfill(1)}.nc","r")
+    ds = yt.load(f"{filetag}")
+    lnd = nc.Dataset(f'{filetag.replace("plt","lnd")}/Level_{str(level).zfill(1)}.nc',"r")
  
     if level > ds.index.max_level:
         raise ValueError(f"Requested level {level} exceeds max level {ds.index.max_level}")
-
-    # Get all data
-    ad = ds.all_data()
-
-    # Compute min and max
-    global_min = ad.min(atmos_var).value
-    global_max = ad.max(atmos_var).value
 
     grids = ds.index.select_grids(level)
 
@@ -148,7 +141,7 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
 
     plt.tight_layout()
     #plt.show()
-    plt.savefig(f'/Users/Akash/Desktop/{level}.png')
+    plt.savefig(f'{level}.png')
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
