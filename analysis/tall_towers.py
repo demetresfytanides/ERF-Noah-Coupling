@@ -5,11 +5,10 @@ import netCDF4 as nc
 import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from matplotlib.colors import BoundaryNorm
+from matplotlib.ticker import MaxNLocator
 
 def plot_amr_level(filetag, atmos_var, land_var, level):
-    import yt
-    import numpy as np
-    import matplotlib.pyplot as plt
 
     ds = yt.load(f"{filetag}")
     lnd = nc.Dataset(f'{filetag.replace("plt","lnd")}/Level_{str(level).zfill(1)}.nc',"r")
@@ -28,6 +27,8 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     field_slices = []
     global_min = np.Inf
     global_max = -np.Inf
+    bounds_min = [np.Inf, np.Inf]
+    bounds_max = [-np.Inf, -np.Inf]
 
     for g in grids:
         try:
@@ -69,8 +70,21 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
         y = np.linspace(y0 + dy/2, y0 + dy * ny - dy/2, ny)
         X, Y = np.meshgrid(x, y, indexing='ij')
 
+        bounds_min[0] = min(bounds_min[0],np.min(x))
+        bounds_max[0] = max(bounds_max[0],np.max(x))
+
+        bounds_min[1] = min(bounds_min[1],np.min(y))
+        bounds_max[1] = max(bounds_max[1],np.max(y))
+
+        # Suppose you want 20 levels
+        num_levels = 200
+        levels = np.linspace(global_min, global_max, num_levels + 1)
+
+        # Create a normalization object
+        norm = BoundaryNorm(boundaries=levels, ncolors=256)  # 256 is typical for 'jet'
+
         im = ax.pcolormesh(X, Y, data, shading='nearest',
-                           cmap='jet', vmin=global_min, vmax=global_max)
+                           cmap='jet', norm=norm)
 
     ax.set_title(f"Atmospheric Var: {atmos_var.capitalize()} | AMR Level: {level}")
     ax.set_xlabel("X (km)")
@@ -82,6 +96,8 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     formatter.set_powerlimits((-3, 3))  # triggers sci notation for large/small values
     ax.xaxis.set_major_formatter(formatter)
     ax.yaxis.set_major_formatter(formatter)
+    ax.xaxis.set_major_locator(MaxNLocator(nbins=5))
+    ax.yaxis.set_major_locator(MaxNLocator(nbins=5))
 
     # --- Colorbar on the left ---
     divider = make_axes_locatable(ax)
@@ -98,12 +114,43 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     #fig.colorbar(im, ax=ax, orientation='vertical', label=field_name)
     ax.set_aspect('equal', adjustable='box')
 
+    x = np.linspace(bounds_min[0], bounds_max[0], len(lnd.dimensions['NX']))
+    y = np.linspace(bounds_min[1], bounds_max[1], len(lnd.dimensions['NY']))
+    X, Y = np.meshgrid(x, y, indexing='xy')
+
     ax2.set_title(f"Land Var: Terrain | AMR Level: {level}")
     lndvar = lnd.variables[land_var.upper()][:]
-    ax2.contourf(lndvar[:,:],cmap="terrain",levels=np.linspace(0,2000,200),extend="both")
+    water = np.where(lndvar<-9998)
+    lndvar[water] = 0.
+    cf = ax2.contourf(X,Y,lndvar[:,:],cmap="terrain",levels=np.linspace(np.min(lndvar),np.max(lndvar),200))
 
-    ax2.set_xticks([])
-    ax2.set_yticks([])
+    ax2.set_xlabel("X (km)")
+    ax2.set_ylabel("Y (km)")
+
+    # Force scientific notation on both axes
+    formatter = ScalarFormatter(useMathText=True)
+    formatter.set_scientific(True)
+    formatter.set_powerlimits((-3, 3))  # triggers sci notation for large/small values
+    ax2.xaxis.set_major_formatter(formatter)
+    ax2.yaxis.set_major_formatter(formatter)
+    ax2.xaxis.set_major_locator(MaxNLocator(nbins=5))
+    ax2.yaxis.set_major_locator(MaxNLocator(nbins=5))
+
+    # --- Colorbar on the left ---
+    divider = make_axes_locatable(ax2)
+    cax = divider.append_axes("right", size="5%", pad=0.1)
+    cb = fig.colorbar(cf, cax=cax, orientation='vertical')
+
+    # Move label to the top
+    if (land_var.lower() == "evbxy"): land_var = "Bare Soil Evap"
+    cb.ax.set_title(land_var.capitalize(), pad=10)
+
+    # Flip colorbar ticks to right side (optional, for left placement)
+    cb.ax.yaxis.set_label_position('right')
+    cb.ax.yaxis.set_ticks_position('right')
+
+    #ax2.set_xticks([])
+    #ax2.set_yticks([])
     ax2.set_aspect('equal', adjustable='box')
 
     # Optional: Draw bounding box for all grids_children
@@ -133,11 +180,11 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
         import matplotlib.patches as patches
         rect = patches.Rectangle((x_min, y_min), width, height,
                                  linewidth=1, edgecolor='black', facecolor='none', linestyle='-')
-        #rect2 = patches.Rectangle((x_min, y_min), width, height,
-        #                         linewidth=1, edgecolor='black', facecolor='none', linestyle='-')
+        rect2 = patches.Rectangle((x_min, y_min), width, height,
+                                 linewidth=1, edgecolor='black', facecolor='none', linestyle='-')
  
         ax.add_patch(rect)
-        #ax2.add_patch(rect2)
+        ax2.add_patch(rect2)
 
     plt.tight_layout()
     #plt.show()
