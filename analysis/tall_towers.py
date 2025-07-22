@@ -118,7 +118,7 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     y = np.linspace(bounds_min[1], bounds_max[1], len(lnd.dimensions['NY']))
     X, Y = np.meshgrid(x, y, indexing='xy')
 
-    ax2.set_title(f"Land Var: Terrain | AMR Level: {level}")
+    ax2.set_title(f"Land Var: {land_var.capitalize()} | AMR Level: {level}")
     lndvar = lnd.variables[land_var.upper()][:]
     water = np.where(lndvar<-9998)
     lndvar[water] = 0.
