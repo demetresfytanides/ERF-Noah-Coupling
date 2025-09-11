@@ -6,8 +6,8 @@ else
 	cd netcdf-fortran
 fi
 
-#export FCFLAGS="-w -fallow-argument-mismatch -O2"
-#export FFLAGS="-w -fallow-argument-mismatch -O2"
+export FCFLAGS="-w -fallow-argument-mismatch -O2"
+export FFLAGS="-w -fallow-argument-mismatch -O2"
 
 CPPFLAGS=-I${NETCDF_HOME}/include LDFLAGS=-L${NETCDF_HOME}/lib ./configure \
 							--enable-netcdf-4 \

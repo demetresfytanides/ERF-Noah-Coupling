@@ -6,7 +6,7 @@ else
 	cd netcdf-c
 fi
 
-./configure --enable-netcdf-4 --enable-parallel4 --enable-shared CC=mpicc CXX=mpicxx --prefix=$NETCDF_HOME CPPFLAGS="$CPPFLAGS"
+./configure --disable-byterange --enable-netcdf-4 --enable-parallel4 --enable-shared CC=mpicc CXX=mpicxx --prefix=$NETCDF_HOME CPPFLAGS="$CPPFLAGS"
 
 # compile and install
 make -j && make install
