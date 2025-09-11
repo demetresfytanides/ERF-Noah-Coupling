@@ -15,7 +15,7 @@ source $SiteHome/environment.sh
 export ERF_HOME="$PROJECT_HOME/software/erf/ERF"
 export AMREX_HOME="$ERF_HOME/Submodules/AMReX"
 export MODEL_HOME="$PROJECT_HOME/models"
-export NOAH_HOME="$ERF_HOME/Submodules/NOAH-MP"
+export NOAH_HOME="$ERF_HOME/Submodules/Noah-MP"
 export NETCDF_HOME="$PROJECT_HOME/software/netcdf/netcdf-install-$SiteName"
 export JASPER_HOME="$PROJECT_HOME/software/jasper/jasper-$SiteName"
 export HRLDAS_HOME="$PROJECT_HOME/software/hrldas/HRLDAS"
