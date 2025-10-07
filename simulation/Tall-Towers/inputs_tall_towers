@@ -17,8 +17,9 @@ xhi.type = "Outflow"
 ylo.type = "Outflow"
 yhi.type = "Outflow"
 
-zlo.type = "NoSlipWall"
+zlo.type = "Surface_Layer"
 zhi.type = "SlipWall"
+erf.most.zref = 1.0
 
 # TIME STEP CONTROL
 erf.fixed_dt           = 0.5  # fixed time step depending on grid resolution
