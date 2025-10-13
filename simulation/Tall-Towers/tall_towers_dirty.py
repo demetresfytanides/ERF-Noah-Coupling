@@ -108,7 +108,7 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
         im = ax.pcolormesh(X, Y, data, shading='nearest',
                            cmap='jet', norm=norm)
 
-    ax.set_title(f"Atmospheric Var: {atmos_var.upper()}")# | AMR Level: {level}")
+    ax.set_title(f"Atmospheric {atmos_var.capitalize()} [K]")# | AMR Level: {level}")
     ax.set_xlabel("X (km)")
     ax.set_ylabel("Y (km)")
 
@@ -141,7 +141,7 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     X, Y = np.meshgrid(x, y, indexing='xy')
 
     if land_var == "TSK":
-        ax2.set_title(f"Land Var: SKIN TEMP")
+        ax2.set_title(f"Skin Temp (TSK) [K]")
     else:
         ax2.set_title(f"Land Var: {land_var.upper()}")# | AMR Level: {level}")
     lndvar = lnd.variables[land_var.upper()][:]
@@ -228,7 +228,7 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
         y = np.linspace(bounds_min[1], bounds_max[1], len(lnd.dimensions['NY']))
         X, Y = np.meshgrid(x, y, indexing='xy')
 
-        axaux.set_title(f"Land Var: SOIL TEMP | Layer: {nsoil}")
+        axaux.set_title(f"SOIL TEMP (TSLB) | Layer: {nsoil} [K]")
         lndvar = lnd.variables["TSLB"][:]
         water = np.where(lndvar<-9998)
         lndvar[water] = 0.
@@ -266,11 +266,11 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
         X, Y = np.meshgrid(x, y, indexing='xy')
 
         if lvar == "HFX":
-            axaux.set_title(f"Land Var: SENSIBLE HEAT [W m-2]")
+            axaux.set_title(f"Sensible Heat Flux (HFX) [W m-2]")
         elif lvar == "LH":
-            axaux.set_title(f"Land Var: LATENT HEAT [W m-2]")
+            axaux.set_title(f"Latent Heat (LH) [W m-2]")
         else:
-            axaux.set_title(f"Land Var: {lvar.upper()}")
+            axaux.set_title(f"{lvar.upper()}")
         lndvar = lnd.variables[lvar.upper()][:]
         water = np.where(lndvar<-9998)
         lndvar[water] = 0.
@@ -325,7 +325,7 @@ if __name__ == "__main__":
     #lndvar = sys.argv[3]
     #level = int(sys.argv[4])
 
-    filetags = [*range(50,1000,50)]
+    filetags = [*range(50,2000,50)]
 
     for filetag in filetags:
         plot_amr_level(f"plt{str(filetag).zfill(5)}", "temp", "TSK", 0)
