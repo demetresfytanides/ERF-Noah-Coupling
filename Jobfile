@@ -21,8 +21,21 @@
 #    - "#SBATCH --ntasks=10"
 #    - "#SBATCH -t 0-30:00"
 #    - "#SBATCH --job-name=os-fri"
+
 schedular:
    command: bash
+
+#schedular:
+#   command: qsub
+#   options:
+#    - "#PBS -N AFFINITY"
+#    - "#PBS -l select=2:ncpus=128"
+#    - "#PBS -l filesystems=home:eagle"
+#    - "#PBS -l walltime=01:00:00"
+#    - "#PBS -q debug"
+#    - "#PBS -A <project>"
+#    - "#PBS -N tall_tow"
+#    - "#PBS -j oe"
 
 # job configuration
 job:

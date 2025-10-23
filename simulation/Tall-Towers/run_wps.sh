@@ -2,8 +2,8 @@
 NodeDir=$(realpath .)
 
 NNODES=`wc -l < $PBS_NODEFILE`
-NRANKS=32 # Number of MPI ranks to spawn per node
-NDEPTH=2 # Number of hardware threads per rank (i.e. spacing between MPI ranks)
+NRANKS=4 # Number of MPI ranks to spawn per node
+NDEPTH=16 # Number of hardware threads per rank (i.e. spacing between MPI ranks)
 NTHREADS=1 # Number of software threads per rank to launch (i.e. OMP_NUM_THREADS)
 
 NTOTRANKS=$(( NNODES * NRANKS ))
