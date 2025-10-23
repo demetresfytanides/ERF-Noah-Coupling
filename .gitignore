@@ -26,6 +26,7 @@ software/cdo/cdo-2.1.1.tar
 software/cdo/cdo-2.1.1
 software/cdo/cdo-install-*
 software/wgrib/wgrib
+software/libxml2/libxml2*
 boxmem
 simulation/NoahMP-Example/NoahMP
 simulation/NoahMP-Example/NoahMP-Example

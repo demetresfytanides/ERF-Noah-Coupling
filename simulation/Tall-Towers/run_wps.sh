@@ -10,6 +10,4 @@ NTOTRANKS=$(( NNODES * NRANKS ))
 
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS} THREADS_PER_RANK= ${NTHREADS}"
 
-# Change the directory to work directory, which is the directory you submit the job.
-cd $PBS_O_WORKDIR
 mpiexec --np ${NTOTRANKS} -ppn ${NRANKS} -d ${NDEPTH} --cpu-bind depth -env OMP_NUM_THREADS=${NTHREADS} tmp_build_dir/Exec/MoistRegTests/WPS_and_Metgrid_Tests/erf_wps_test inputs_tall_towers

@@ -1,10 +1,11 @@
 # Load MPI module. This should be available as standard module on a cluster.
 # If not, build your own MPI and update PATH, LD_LIBRARY_PATH
 
+module load gcc-native/12.3
 module load PrgEnv-gnu/8.5.0 
 module load cray-python/3.11.5
 module load cray-hdf5-parallel/1.12.2.9
-
+module load cuda/12.6
 
 # Set MPI_HOME by quering path loaded by site module
 export MPI_HOME=$(which mpicc | sed s/'\/bin\/mpicc'//)

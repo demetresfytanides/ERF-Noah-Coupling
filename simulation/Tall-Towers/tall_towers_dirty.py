@@ -269,6 +269,10 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
             axaux.set_title(f"Sensible Heat Flux (HFX) [W m-2]")
         elif lvar == "LH":
             axaux.set_title(f"Latent Heat (LH) [W m-2]")
+        elif lvar == "TAU_EW":
+            axaux.set_title(f"Wind Stress East-West [N m-2]")
+        elif lvar == "TAU_NS":
+            axaux.set_title(f"Wind Stress North-South [N m-2]")
         else:
             axaux.set_title(f"{lvar.upper()}")
         lndvar = lnd.variables[lvar.upper()][:]
@@ -312,6 +316,7 @@ def plot_amr_level(filetag, atmos_var, land_var, level):
     plt.tight_layout()
     #plt.show()
     plt.savefig(f'{filetag}_{level}.png')
+    plt.close()
 
 if __name__ == "__main__":
 
