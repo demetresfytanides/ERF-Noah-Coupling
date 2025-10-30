@@ -17,8 +17,9 @@ xhi.type = "Outflow"
 ylo.type = "Outflow"
 yhi.type = "Outflow"
 
-zlo.type = "NoSlipWall"
+zlo.type = "Surface_Layer"
 zhi.type = "SlipWall"
+erf.most.zref = 1.0
 
 # TIME STEP CONTROL
 erf.fixed_dt           = 0.5  # fixed time step depending on grid resolution
@@ -47,9 +48,10 @@ erf.use_gravity = true
 
 erf.terrain_type = StaticFittedMesh
 
-erf.moisture_model = "Kessler"
+erf.land_surface_model = "NOAHMP"
+erf.coupling_type = "OneWay"
 
-erf.land_surface_model = "NOAH"
+erf.moisture_model = "Kessler"
 
 erf.les_type          = "None"
 erf.molec_diff_type   = "Constant"
@@ -60,6 +62,30 @@ erf.abl_driver_type = "GeostrophicWind"
 erf.latitude = 90.
 erf.abl_geo_wind = 15.0 0.0 0.0
 erf.rotational_time_period = 86164.0900027328
+
+# RADIATION INPUTS
+erf.radiation_model        = "RRTMGP"
+erf.rad.datalog            = "radiation"
+erf.profile_rad_int        = 100
+erf.rad_freq_in_steps      = 100
+erf.rad_do_subcol_sampling = true
+erf.rad_write_fluxes       = false
+erf.co2vmr                 = 0.00036
+erf.o3vmr                  = 3.0e-8 
+erf.n2ovmr                 = 3.2e-7
+erf.covmr                  = 1.5e-7
+erf.ch4vmr                 = 1.7e-6
+erf.o2vmr                  = 0.209
+erf.n2vmr                  = 0.7906
+erf.nswbands               = 14
+erf.nlwbands               = 16
+erf.nswgpts                = 224
+erf.nlwgpts                = 256  
+erf.rrtmgp_file_path       = .
+erf.rrtmgp_coeffs_sw       = rrtmgp-data-sw-g224-2018-12-04.nc
+erf.rrtmgp_coeffs_lw       = rrtmgp-data-lw-g256-2018-12-04.nc
+erf.rrtmgp_cloud_optics_sw = rrtmgp-cloud-optics-coeffs-sw.nc
+erf.rrtmgp_cloud_optics_lw = rrtmgp-cloud-optics-coeffs-lw.nc
 
 # PROBLEM PARAMETERS (optional)
 prob.rho_0 = 1.0
