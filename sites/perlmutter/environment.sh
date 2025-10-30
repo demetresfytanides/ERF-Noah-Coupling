@@ -6,10 +6,11 @@ module load PrgEnv-gnu/8.5.0
 module load cray-python/3.11.5
 module load cray-hdf5-parallel/1.12.2.9
 module load cudatoolkit/
+module load cray-netcdf-hdf5parallel/4.9.0.9
 #module load cuda/12.4
-#export NETCDF_DIR=/opt/cray/pe/netcdf-hdf5parallel/4.9.0.9
+export NETCDF_DIR=/opt/cray/pe/netcdf-hdf5parallel/4.9.0.9/gnu/12.3
 #module load cmake
-
+export MPICH_GPU_SUPPORT_ENABLED=1
 # Set MPI_HOME by quering path loaded by site module
 export MPI_HOME=$(which mpicc | sed s/'\/bin\/mpicc'//)
 export CUDA_HOME=$(which nvcc | sed s/'\/bin\/nvcc'//)
