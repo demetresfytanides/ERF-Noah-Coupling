@@ -6,10 +6,14 @@ job:
   submit:
     - run_wps.sh
   clean:
-    - erf_wps_test
-    - "*.exe"
+    - "plt*"
+    - "lnd*"
+    - "Backtrace*"
+    - "core*"
+    - "radiation"
   archive:
     - "radiation"
     - "tall_towers.e*"
     - "tall_towers.o*"
-    - "plt*.png"
+    - "plt*"
+    - "lnd*"
