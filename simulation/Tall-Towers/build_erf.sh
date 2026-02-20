@@ -22,7 +22,7 @@ cmake -DCMAKE_INSTALL_PREFIX:PATH=./install \
    -DERF_ENABLE_FCOMPARE:BOOL=ON \
    -DERF_ENABLE_DOCUMENTATION:BOOL=OFF \
    -DERF_ENABLE_NETCDF:BOOL=ON \
-   -DNETCDF_DIR=$NETCDF_DIR \
+   -DNETCDF_DIR=$NETCDF_HOME \
    -DERF_ENABLE_NOAHMP:BOOL=ON \
    -DERF_ENABLE_HDF5:BOOL=OFF \
    -DERF_ENABLE_EKAT:BOOL=ON \
@@ -34,3 +34,4 @@ cmake -DCMAKE_INSTALL_PREFIX:PATH=./install \
    $ERF_HOME && make -j
    #-DCMAKE_BUILD_TYPE=Debug \
    #-DCMAKE_CUDA_FLAGS="-I${MPI_HOME}/include" \
+   #-DNETCDF_DIR=$NETCDF_DIR \ # For Perlmutter where NETCDF Fortran and C++ are already available in the environment.sh
