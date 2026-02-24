@@ -2,7 +2,7 @@
 
 # Setup AMReX
 if [ ! -d "ERF" ]; then
-	git clone --recursive git@github.com:AIEADA/ERF --branch adhruv/noah-mp ERF && cd ERF
+	git clone --recursive git@github.com:AIEADA/ERF --branch development ERF && cd ERF
 
 	# checkout desired branch
 	#git checkout 23.11
