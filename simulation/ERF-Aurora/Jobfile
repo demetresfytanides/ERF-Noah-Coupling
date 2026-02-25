@@ -8,6 +8,7 @@ job:
   clean:
     - "plt*"
     - "lnd*"
+    - "chk*"
     - "Backtrace*"
     - "core*"
     - "radiation"
@@ -16,3 +17,4 @@ job:
     - "radiation"
     - "plt*"
     - "lnd*"
+    - "chk*"
