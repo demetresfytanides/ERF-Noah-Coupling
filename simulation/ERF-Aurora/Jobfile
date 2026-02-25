@@ -4,7 +4,7 @@ job:
   setup:
     - build_erf.sh
   submit:
-    - run_wps.sh
+    - run_erf.sh
   clean:
     - "plt*"
     - "lnd*"
@@ -14,7 +14,5 @@ job:
     - "tmp_build_dir"
   archive:
     - "radiation"
-    - "tall_towers.e*"
-    - "tall_towers.o*"
     - "plt*"
     - "lnd*"
